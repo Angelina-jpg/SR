@@ -1,0 +1,43 @@
+import random
+class Answer:
+    def __init__(self, answer_txt):
+        self.answer_txt = answer_txt
+
+class Question:
+    def __init__(self, question_txt, list_answers):
+        self.question_txt = question_txt
+        self.list_answers = list_answers
+
+class Test:
+    list_question=[]
+    amount_answers=0
+
+    def questionGenerator(self):
+        myAnswers=[]
+        question_txt = input("Введите текст вопроса: ")
+        Test.amount_answers - int(input("Задайте количество возможных ответов: "))
+
+        for i in range(Test.amount_answers):
+            answer_txt = input(f"Введите текст {i+1} ответа: ")
+            myAnswers.append(Answer(answer_txt))
+        random.shuffle(myAnswers)
+        question = Question(question_txt, myAnswers)
+        Test.list_question.append(question)
+
+    def getTest(cls):
+        random.shuffle(cls.list_question)
+        for i, question in enumerate(cls.list_question):
+                print(f"{i+1}. {question.question_txt}")
+                for j, answer in enumerate(question.list_answers):
+                    print(f"{j+1}.{answer.answer_txt}")
+
+#создадим несколько вопросов
+myQuest1 = Test()
+myQuest1.questionGenerator()
+myQuest2 = Test()
+myQuest2.questionGenerator()
+print("Смотрим тест")
+Test.getTest()
+#перемешиваем варианты ответов и выведем тест еще раз
+print("Смотрим что варианты ответов перемешались")
+Test.getTest()
